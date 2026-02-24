@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ملاحظاتي الآمنة</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="security-screen" class="security-overlay">
+        <div class="security-box">
+            <div class="lock-icon"><i class="fas fa-fingerprint"></i></div>
+            <h2>ملاحظات خاصة</h2>
+            <p>أدخل رمز الدخول للمتابعة</p>
+            <div class="pin-display" id="pin-display">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="numpad" id="numpad">
+                <button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button>
+                <button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button>
+                <button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button>
+                <button class="clear" data-action="clear"><i class="fas fa-backspace"></i></button>
+                <button data-num="0">0</button>
+                <button class="enter" data-action="enter"><i class="fas fa-arrow-left"></i></button>
+            </div>
+            <p id="setup-msg" class="setup-hint">قم بتعيين رمز جديد (4 أرقام)</p>
+        </div>
+    </div>
+
+    <div class="app-layout">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>المجلدات</h2>
+                <button id="add-folder-btn" class="icon-btn"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="folders-list" id="folders-list">
+                <!-- Folders injected here -->
+            </div>
+            <div class="sidebar-footer">
+                <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+                <button id="reset-pin"><i class="fas fa-key"></i></button>
+            </div>
+        </aside>
+
+        <main class="chat-interface">
+            <header class="chat-header">
+                <div class="header-left">
+                    <button id="menu-btn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+                    <div class="header-title">
+                        <h3 id="current-folder-title">عام</h3>
+                        <span id="msg-count">0 ملاحظة</span>
+                    </div>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="بحث...">
+                </div>
+            </header>
+
+            <div class="messages-area" id="messages-area">
+                <!-- Messages injected here -->
+                <div class="empty-state" id="empty-state">
+                    <i class="fas fa-pen-fancy"></i>
+                    <p>لا توجد ملاحظات هنا، ابدأ الكتابة...</p>
+                </div>
+            </div>
+
+            <footer class="input-section">
+                <div id="attachment-preview" class="attachment-preview"></div>
+                
+                <div class="input-container">
+                    <input type="file" id="media-input" hidden accept="image/*,video/*,audio/*">
+                    <button id="attach-btn" class="action-btn"><i class="fas fa-paperclip"></i></button>
+                    
+                    <div class="text-input-wrapper">
+                        <textarea id="message-input" placeholder="اكتب ملاحظة..." rows="1"></textarea>
+                    </div>
+                    
+                    <button id="send-btn" class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </footer>
+        </main>
+
+    </div>
+
+    <!-- Modal for Folder Name -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <h3>مجلد جديد</h3>
+            <input type="text" id="folder-name-input" placeholder="اسم المجلد">
+            <div class="modal-buttons">
+                <button id="modal-cancel">إلغاء</button>
+                <button id="modal-save" class="primary">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
