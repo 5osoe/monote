@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>menote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="security-layer">
+        <div class="security-container">
+            <h1 class="brand-title">menote</h1>
+            <p id="security-message">Enter Passcode</p>
+            <div class="pin-dots" id="pin-dots">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="numpad" id="numpad">
+                <button data-val="1">1</button><button data-val="2">2</button><button data-val="3">3</button>
+                <button data-val="4">4</button><button data-val="5">5</button><button data-val="6">6</button>
+                <button data-val="7">7</button><button data-val="8">8</button><button data-val="9">9</button>
+                <button class="action-btn" data-action="clear">C</button>
+                <button data-val="0">0</button>
+                <button class="action-btn" data-action="enter">&rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-layer">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h2>menote</h2>
+                <button id="add-folder-btn">+</button>
+            </div>
+            <div id="folder-list"></div>
+            <div class="sidebar-footer">
+                <button id="reset-pin-btn">Reset PIN</button>
+            </div>
+        </aside>
+
+        <main id="main-content">
+            <header class="top-bar">
+                <button id="menu-toggle">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <h3 id="current-folder-title">General</h3>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search...">
+                </div>
+            </header>
+
+            <div id="notes-container"></div>
+
+            <div class="input-area">
+                <div id="file-preview"></div>
+                <div class="input-wrapper">
+                    <input type="file" id="file-input" hidden>
+                    <button id="attach-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                    </button>
+                    <textarea id="note-input" rows="1" placeholder="Type a secure note..."></textarea>
+                    <button id="send-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-overlay">
+        <div class="modal">
+            <h3 id="modal-title">New Folder</h3>
+            <input type="text" id="modal-input" placeholder="Folder Name">
+            <div class="modal-actions">
+                <button id="modal-cancel">Cancel</button>
+                <button id="modal-confirm">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
