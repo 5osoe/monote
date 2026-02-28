@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACK PSD | Extract the Invisible</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- External Libraries -->
+    <script src="https://unpkg.com/ag-psd@14.4.2/dist/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Top Navigation -->
+        <header class="app-header">
+            <div class="brand">
+                <h1>HACK_PSD</h1>
+                <span class="tagline">EXTRACT THE INVISIBLE</span>
+            </div>
+            <div class="controls">
+                <button id="btn-clear" class="btn-outline hidden">CLEAR SESSION</button>
+            </div>
+        </header>
+
+        <!-- Main Workspace (CSS Grid) -->
+        <main class="workspace" id="workspace">
+            
+            <!-- Left Column: Layers (Collapsible on Mobile) -->
+            <aside class="col-layers hidden" id="panel-layers">
+                <details class="mobile-collapse" open>
+                    <summary class="panel-header">
+                        <h2>[ LAYERS ]</h2>
+                        <label class="select-all-wrap" onclick="event.stopPropagation()">
+                            <input type="checkbox" id="check-all"> ALL
+                        </label>
+                    </summary>
+                    <div class="layer-tree-container" id="layer-tree-container">
+                        <!-- Layers injected here in chunks -->
+                    </div>
+                </details>
+            </aside>
+
+            <!-- Center Column: Upload & Preview -->
+            <section class="col-center">
+                <!-- Upload Zone -->
+                <div id="upload-zone" class="upload-zone">
+                    <div class="upload-content">
+                        <div class="icon-pixel">[+]</div>
+                        <h3>INITIATE UPLOAD</h3>
+                        <p class="sub-text">.PSD / .PSB / .TIFF</p>
+                        <p class="sub-text warning-text">NO SIZE LIMIT. LOCAL PROCESSING ONLY.</p>
+                        <input type="file" id="file-input" accept=".psd,.psb,.tiff" hidden>
+                        <button class="btn-primary" onclick="document.getElementById('file-input').click()">BROWSE SYSTEM</button>
+                    </div>
+                </div>
+
+                <!-- Metadata Dashboard -->
+                <div id="dashboard" class="dashboard hidden">
+                    <div class="panel file-info">
+                        <h3 class="panel-header">[ METADATA ]</h3>
+                        <div class="info-grid" id="metadata-list">
+                            <!-- Metadata injected here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Export Settings -->
+            <aside class="col-settings hidden" id="panel-settings">
+                <div class="panel">
+                    <h3 class="panel-header">[ SETTINGS ]</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="preserve-dpi" checked>
+                            PRESERVE ORIGINAL DPI
+                        </label>
+                    </div>
+                    
+                    <div class="desktop-export-actions">
+                        <button id="btn-export-zip-desktop" class="btn-primary w-full">EXPORT ZIP</button>
+                        <button id="btn-export-pdf-desktop" class="btn-primary w-full mt-2">EXPORT PDF</button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Mobile Sticky Export Bar -->
+        <div class="mobile-sticky-bar hidden" id="mobile-sticky-bar">
+            <button id="btn-export-zip-mobile" class="btn-primary">ZIP</button>
+            <button id="btn-export-pdf-mobile" class="btn-primary">PDF</button>
+        </div>
+    </div>
+
+    <!-- Multi-stage Progress Overlay -->
+    <div id="progress-container" class="progress-container hidden">
+        <div class="progress-box">
+            <div id="progress-stage" class="progress-stage">INITIALIZING...</div>
+            <div class="progress-text"><span id="progress-percent">0</span>%</div>
+            <div class="progress-bar-bg">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+            <div class="memory-warning">Processing locally. Do not close tab.</div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

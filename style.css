@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #0f0f0f;
+    --fg-color: #ffffff;
+    --accent-red: #ff2a2a;
+    --border-color: #333333;
+    --hover-bg: #1a1a1a;
+    --grid-bg: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
+    --font-mono: 'Space Mono', monospace;
+    --border-style: 1px solid var(--border-color);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    font-family: var(--font-mono);
+    /* Fluid typography */
+    font-size: clamp(12px, 1.5vw, 14px);
+    height: 100vh;
+    height: 100dvh; /* Mobile safe */
+    overflow: hidden;
+    background-image: var(--grid-bg);
+    background-size: 20px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-color);
+    border-left: var(--border-style);
+    border-right: var(--border-style);
+}
+
+/* Typography & Utilities */
+h1, h2, h3 { font-weight: 700; letter-spacing: 1px; }
+.hidden { display: none !important; }
+.w-full { width: 100%; }
+.mt-2 { margin-top: 10px; }
+
+/* Buttons */
+button {
+    font-family: var(--font-mono);
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--fg-color);
+    padding: 10px 16px;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+    font-size: clamp(10px, 1.2vw, 12px);
+}
+button:hover { background: var(--fg-color); color: var(--bg-color); }
+button.btn-primary { border-color: var(--fg-color); font-weight: bold; }
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: var(--border-style);
+}
+.brand h1 { font-size: clamp(16px, 2vw, 24px); }
+.tagline { font-size: clamp(10px, 1vw, 12px); color: #888; }
+
+/* Main Workspace Grid */
+.workspace {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Upload Zone */
+.upload-zone {
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--border-color);
+    margin: 20px;
+    transition: background 0.2s;
+}
+.upload-zone.dragover { background: var(--hover-bg); border-color: var(--fg-color); }
+.upload-content { text-align: center; }
+.icon-pixel { font-size: 3rem; margin-bottom: 20px; }
+.sub-text { color: #888; margin: 10px 0 20px; }
+.warning-text { color: var(--accent-red); font-size: 0.85em; }
+
+/* Panels */
+.panel { padding: 20px; border-bottom: var(--border-style); }
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-style);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+/* Layer Tree */
+.col-layers { border-right: none; border-bottom: var(--border-style); }
+.layer-tree-container { max-height: 50vh; overflow-y: auto; padding-right: 5px; }
+.layer-item { display: flex; align-items: center; padding: 4px 0; margin-left: var(--indent, 0px); border-bottom: 1px dashed #222; }
+.layer-item label { display: flex; align-items: center; gap: 8px; cursor: pointer; width: 100%; }
+.layer-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.85em; }
+.badge { font-size: 0.6rem; padding: 1px 4px; border: 1px solid var(--border-color); }
+.smart-dot { width: 6px; height: 6px; background-color: var(--accent-red); display: inline-block; }
+
+/* File Info Grid */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.info-item { border: var(--border-style); padding: 10px; font-size: 0.85em; }
+.info-label { color: #888; display: block; margin-bottom: 4px; font-size: 0.8em; }
+
+/* Mobile Sticky Bar */
+.mobile-sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--bg-color);
+    border-top: var(--border-style);
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    z-index: 50;
+}
+.mobile-sticky-bar button { flex: 1; }
+.desktop-export-actions { display: none; }
+
+/* Progress Indicator */
+.progress-container {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 15, 15, 0.95);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+}
+.progress-box { width: 80%; max-width: 400px; text-align: center; }
+.progress-stage { color: var(--accent-red); margin-bottom: 10px; letter-spacing: 2px; }
+.progress-bar-bg { width: 100%; height: 2px; background: #222; margin: 15px 0; }
+.progress-bar-fill { height: 100%; width: 0%; background: var(--fg-color); transition: width 0.1s linear; }
+.memory-warning { font-size: 0.75rem; color: #666; }
+
+/* Toasts */
+.toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: var(--bg-color); border: 1px solid var(--fg-color); padding: 10px 20px; animation: slideIn 0.3s ease-out forwards; }
+.toast.warning { border-color: yellow; color: yellow; }
+.toast.error { border-color: var(--accent-red); color: var(--accent-red); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* Breakpoints */
+@media (min-width: 768px) {
+    .workspace { grid-template-columns: 1fr 1fr; overflow-y: hidden; }
+    .col-layers { border-right: var(--border-style); border-bottom: none; overflow-y: auto; }
+    .col-center { overflow-y: auto; }
+    .col-settings { grid-column: span 2; border-top: var(--border-style); }
+    .layer-tree-container { max-height: none; }
+    details.mobile-collapse summary { pointer-events: none; } /* Disable collapse on desktop */
+}
+
+@media (min-width: 1024px) {
+    .workspace { grid-template-columns: 320px 1fr 300px; }
+    .col-settings { grid-column: span 1; border-top: none; border-left: var(--border-style); }
+    .desktop-export-actions { display: block; margin-top: 20px; }
+    .mobile-sticky-bar { display: none !important; }
+}
